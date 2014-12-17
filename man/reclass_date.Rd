@@ -4,7 +4,7 @@
 \alias{reclass_date}
 \title{Convenience method to reclass dates post-modification.}
 \usage{
-reclass_date(new, orig)
+\method{reclass_date}{POSIXlt}(new, orig)
 }
 \description{
 Convenience method to reclass dates post-modification.

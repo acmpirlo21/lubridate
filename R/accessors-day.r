@@ -6,8 +6,11 @@ NULL
 #' Date-time must be a POSIXct, POSIXlt, Date, chron, yearmon, yearqtr, zoo, 
 #' zooreg, timeDate, xts, its, ti, jul, timeSeries, and fts objects. 
 #'
-#' @export
+#' @export day yday mday "day<-" "yday<-" "mday<-"
 #' @aliases day yday mday day<- yday<- mday<-
+#' @method yday default
+#' @method mday default
+#' @method mday Period
 #' @param x a POSIXct, POSIXlt, Date, Period, chron, yearmon, yearqtr, zoo, zooreg,
 #'    timeDate, xts, its, ti, jul, timeSeries, or fts object. 
 #' @return yday returns the day of the year as a decimal number (01-366). mday returns the day of 
@@ -23,10 +26,10 @@ NULL
 #' mday(x) > 3
 yday <- function(x) 
   UseMethod("yday")
-
-#' @export
+  
 yday.default <- function(x)
   as.POSIXlt(x, tz = tz(x))$yday + 1
+
 
 
 #' Get/set days component of a date-time.
@@ -34,8 +37,10 @@ yday.default <- function(x)
 #' Date-time must be a POSIXct, POSIXlt, Date, chron, yearmon, yearqtr, zoo, 
 #' zooreg, timeDate, xts, its, ti, jul, timeSeries, and fts objects. 
 #'
-#' @export
+#' @export wday "wday<-"
 #' @aliases wday wday<- 
+#' @method wday default
+#' @method wday numeric
 #' @param x a POSIXct, POSIXlt, Date, chron, yearmon, yearqtr, zoo, zooreg, timeDate, xts, its, ti, 
 #'   jul, timeSeries, or fts object. 
 #' @param label logical. Only available for wday. TRUE will display the day of the week as an 
@@ -65,12 +70,10 @@ yday.default <- function(x)
 wday <- function(x, label = FALSE, abbr = TRUE) 
   UseMethod("wday")
 
-#' @export
 wday.default <- function(x, label = FALSE, abbr = TRUE){
   wday(as.POSIXlt(x, tz = tz(x))$wday + 1, label, abbr)
 }
 
-#' @export
 wday.numeric <- function(x, label = FALSE, abbr = TRUE) {
   if (!label) return(x)
   
@@ -83,26 +86,19 @@ wday.numeric <- function(x, label = FALSE, abbr = TRUE) {
   ordered(x, levels = 1:7, labels = labels)  
 }
 
-#' @export
-mday <- function(x) 
-    UseMethod("mday")
-
-#' @export
-day <- mday
-
-#' @export
+  
+mday <- day <- function(x) 
+  UseMethod("mday")
+  
 mday.default <- function(x)
   as.POSIXlt(x, tz = tz(x))$mday
 
-#' @export
 mday.Period <- function(x)
   slot(x, "day")
 
-#' @export
 "yday<-" <- function(x, value)
   x <- x + days(value - yday(x))
 
-#' @export
 "wday<-" <- function(x, value){
   if (!is.numeric(value)) {
   	value <- pmatch(tolower(value), c("sunday", "monday", "tuesday", 
@@ -111,7 +107,6 @@ mday.Period <- function(x)
   x <- x + days(value - wday(x))
 }
 
-#' @export
 "day<-" <- "mday<-" <- function(x, value)
   x <- x + days(value - mday(x))
 

@@ -5,7 +5,7 @@
 \alias{tz<-}
 \title{Get/set time zone component of a date-time.}
 \usage{
-tz(x)
+\method{tz}{default}(x)
 }
 \arguments{
 \item{x}{a date-time object of class a POSIXct, POSIXlt, Date, chron, yearmon,

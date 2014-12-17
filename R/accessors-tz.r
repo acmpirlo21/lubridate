@@ -23,8 +23,12 @@
 #' For a description of the time zone attribute, see \code{\link[base]{timezones}} 
 #' or \code{\link[base]{DateTimeClasses}}. 
 #'
-#' @export
+#' @export tz "tz<-"
 #' @aliases tz tz<-
+#' @method tz default 
+#' @method tz zoo 
+#' @method tz timeSeries
+#' @method tz irts 
 #' @param x a date-time object of class a POSIXct, POSIXlt, Date, chron, yearmon, 
 #' yearqtr, zoo, zooreg, timeDate, xts, its, ti, jul, timeSeries, fts or anything else that can 
 #' be coerced to POSIXlt with as.POSIXlt
@@ -59,7 +63,6 @@
 tz <- function (x) 
   UseMethod("tz")
 
-#' @export
 tz.default <- function(x) {
   if (is.null(attr(x,"tzone")) && !is.POSIXt(x))
     return("UTC")
@@ -67,21 +70,17 @@ tz.default <- function(x) {
   tzs[1]
 }
 
-#' @export
 tz.zoo <- function(x){
   tzs <- attr(as.POSIXlt(zoo::index(x)), "tzone")
   tzs[1]
 }
 
-#' @export
 tz.timeSeries <- function(x)
   x@FinCenter
 
-#' @export
 tz.irts <- function(x)
   return("GMT")
 
-#' @export
 "tz<-" <- function(x, value){
   new <- force_tz(x, value)
   reclass_date(new, x)

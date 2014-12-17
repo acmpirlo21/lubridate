@@ -9,7 +9,7 @@
 \alias{yday<-}
 \title{Get/set days component of a date-time.}
 \usage{
-yday(x)
+\method{yday}{default}(x)
 }
 \arguments{
 \item{x}{a POSIXct, POSIXlt, Date, Period, chron, yearmon, yearqtr, zoo, zooreg,

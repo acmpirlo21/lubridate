@@ -5,7 +5,7 @@
 \alias{second<-}
 \title{Get/set seconds component of a date-time.}
 \usage{
-second(x)
+\method{second}{default}(x)
 }
 \arguments{
 \item{x}{a date-time object}

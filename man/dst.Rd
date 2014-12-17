@@ -4,7 +4,7 @@
 \alias{dst}
 \title{Get Daylight Savings Time indicator of a date-time.}
 \usage{
-dst(x)
+\method{dst}{default}(x)
 }
 \arguments{
 \item{x}{a date-time object}

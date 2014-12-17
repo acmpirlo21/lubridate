@@ -2,15 +2,9 @@
 % Please edit documentation in R/update.r
 \name{DateUpdate}
 \alias{DateUpdate}
-\alias{update.POSIXt}
 \title{Changes the components of a date object}
-\usage{
-\method{update}{POSIXt}(object, ...)
-}
 \arguments{
 \item{object}{a date-time object}
-
-\item{...}{...}
 
 \item{years}{a value to substitute for the date's year component}
 
@@ -31,6 +25,8 @@
 \item{seconds}{a value to substitute for the date's second component}
 
 \item{tzs}{a value to substitute for the date's tz component}
+
+\item{...}{...}
 }
 \value{
 a date object with the requested elements updated. The object will

@@ -4,7 +4,7 @@
 \alias{decimal_date}
 \title{Converts a date to a decimal of its year.}
 \usage{
-decimal_date(date)
+\method{decimal_date}{default}(date)
 }
 \arguments{
 \item{date}{a POSIXt or Date object}

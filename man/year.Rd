@@ -5,7 +5,7 @@
 \alias{year<-}
 \title{Get/set years component of a date-time.}
 \usage{
-year(x)
+\method{year}{default}(x)
 }
 \arguments{
 \item{x}{a date-time object}

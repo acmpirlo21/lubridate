@@ -6,8 +6,11 @@ NULL
 #' Date-time must be a POSIXct, POSIXlt, Date, Period, chron, yearmon, yearqtr, zoo, 
 #' zooreg, timeDate, xts, its, ti, jul, timeSeries, and fts objects. 
 #'
-#' @export
-#' @aliases month<-
+#' @export month "month<-"
+#' @aliases month month<-
+#' @method month default
+#' @method month numeric
+#' @method month Period
 #' @param x a date-time object  
 #' @param label logical. TRUE will display the month as a character string
 #'   such as "January." FALSE will display the month as a number.
@@ -33,12 +36,10 @@ NULL
 #' # "Jan" "Feb" "Mar" "Apr" "May" "Jun" "Jul" "Aug" "Sep" "Oct" "Nov" "Dec"
 month <- function(x, label = FALSE, abbr = TRUE) 
   UseMethod("month")
-
-#' @export
+  
 month.default <- function(x, label = FALSE, abbr = TRUE)
   month(as.POSIXlt(x, tz = tz(x))$mon + 1, label, abbr)
   
-#' @export
 month.numeric <- function(x, label = FALSE, abbr = TRUE) {
   if (!label) return(x)
   
@@ -54,11 +55,9 @@ month.numeric <- function(x, label = FALSE, abbr = TRUE) {
   ordered(x, levels = 1:12, labels = labels)
 }
     
-#' @export
 month.Period <- function(x, label = FALSE, abbr = TRUE)
   slot(x, "month")
 
-#' @export
 "month<-" <- function(x, value) {
 	if (!is.numeric(value)) {
 			value <- pmatch(tolower(value), c("january", "february", "march", 
@@ -72,7 +71,7 @@ month.Period <- function(x, label = FALSE, abbr = TRUE)
 #' Date-time must be a POSIXct, POSIXlt, Date, chron, yearmon, yearqtr, 
 #' zoo, zooreg, timeDate, xts, its, ti, jul, timeSeries, and fts objects.
 #'
-#' @export
+#' @export days_in_month
 #' @param x a date-time object
 #' @return An integer of the number of days in the month component of the date-time object.
 days_in_month <- function(x) {
